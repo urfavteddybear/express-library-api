@@ -9,6 +9,7 @@ db.run(`CREATE TABLE IF NOT EXISTS books (
     title TEXT,
     author TEXT,
     category_id INTEGER,
+    description TEXT,
     FOREIGN KEY(category_id) REFERENCES categories(id)
 )`);
 
@@ -31,13 +32,32 @@ router.get('/:id', (req, res) => {
 });
 
 // POST a new book
+// POST a new book with category validation
+// POST a new book with category validation
 router.post('/', (req, res) => {
-    const { title, author, category_id } = req.body;
-    db.run('INSERT INTO books (title, author, category_id) VALUES (?, ?, ?)', [title, author, category_id], function (err) {
-        if (err) return res.status(500).json({ error: err.message });
-        res.json({ id: this.lastID, title, author, category_id });
+    const { title, author, category_id, description } = req.body;
+
+    // Check if category_id exists
+    db.get('SELECT * FROM categories WHERE id = ?', [category_id], (err, row) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+
+        if (!row) {
+            return res.status(400).json({ message: 'Category not found' });
+        }
+
+        // If category exists, proceed to insert the book
+        db.run('INSERT INTO books (title, author, category_id, description) VALUES (?, ?, ?, ?)', [title, author, category_id, description], function (err) {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+            res.json({ id: this.lastID, title, author, category_id, description });
+        });
     });
 });
+
+
 
 // PUT (Update) a book by ID
 router.put('/:id', (req, res) => {
