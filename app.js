@@ -4,6 +4,14 @@ const app = express();
 const booksRouter = require('./routes/books');
 const categoriesRouter = require('./routes/categories');
 
+// Logging middleware
+app.use((req, res, next) => {
+    const now = new Date();
+    const logMessage = `${now.toISOString()} - ${req.method} ${req.originalUrl}`;
+    console.log(logMessage);
+    next(); // Proceed to the next middleware or route handler
+});
+
 app.use(bodyParser.json());
 
 app.use('/api/books', booksRouter);
