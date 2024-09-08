@@ -2,11 +2,12 @@
   "name": "library-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "migration": "node database/migration.js",
-    "seed": "node database/seed.js"
+    "seed": "node database/seed.js",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
