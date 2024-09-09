@@ -7,7 +7,7 @@ services:
     ports:
       - "3001:3001" # Not required
     volumes:
-      - .:/app/ # Mount code directory
+      - ./src:/app/src # Mount code directory
     environment:
       - NODE_ENV=production # Set your environment variables if needed
     restart: unless-stopped
