@@ -1,0 +1,13 @@
+services:
+  express-library-api:
+    container_name: express-library-api
+    build:
+      context: .
+      target: express-library-api
+    ports:
+      - "3001:3001" # Not required
+    volumes:
+      - .:/app/ # Mount code directory
+    environment:
+      - NODE_ENV=production # Set your environment variables if needed
+    restart: unless-stopped
