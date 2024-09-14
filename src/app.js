@@ -19,7 +19,7 @@ app.use('/api/categories', categoriesRouter);
 
 // Start the server
 const PORT = process.env.PORT || 3001;
-const HOST = process.env.HOST || '127.0.0.1'; // Specify the IP address
+const HOST = process.env.HOST || '0.0.0.0'; // Specify the IP address
 
 app.listen(PORT, HOST, () => {
     console.log(`Server is running on http://${HOST}:${PORT}`);
