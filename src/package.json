@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node database/migration.js && node database/seed.js",
     "migration": "node database/migration.js",
     "seed": "node database/seed.js",
     "start": "node app.js"
