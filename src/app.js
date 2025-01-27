@@ -7,14 +7,6 @@ const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 
-// Logging middleware
-// app.use((req, res, next) => {
-//     const now = new Date();
-//     const logMessage = `${now.toISOString()} - ${req.method} ${req.originalUrl}`;
-//     console.log(logMessage);
-//     next(); // Proceed to the next middleware or route handler
-// });
-
 // Logging
 const accessLogStream = fs.createWriteStream(path.join(__dirname, '../access.log'), { flags: 'a' });
 app.use(morgan(':date[iso] - :remote-addr - :method :url :status :response-time ms', { stream: accessLogStream })); // Log to file
